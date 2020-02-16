@@ -1,28 +1,59 @@
 # eslint-config
 
-This is a global style preference that enforces consistent formatting.
+This is a global style preference that enforces consistent formatting. If used with `vscode`
+
+```bash
+npm run lint
+npm run lint -- --fix
+```
 
 # Project Configuration
 
-The following command will perform an npm install and create all the configuration files you need
+1. The following command will perform an npm install and create all the configuration files you need
 
-    npx @jsonxr/eslint-config
+   ```bash
+   npx @jsonxr/eslint-config
+   ```
+
+2. Add the following to your `package.json` file
+
+   ```javascript
+   {
+     "scripts": {
+       "lint": "eslint 'src/**/*.*' index.js"
+     }
+   }
+   ```
 
 # Files
 
-## 1. `.eslintrc.js`
+### `.eslintrc.js`
 
-    module.exports = { "extends": "@jsonxr" }
+```javascript
+module.exports = { extends: '@jsonxr' };
+```
 
-## 2. `.prettierrc.js`
+### `.prettierrc.js`
 
-    module.exports = "@jsonxr/eslint-config/prettier"
+```javascript
+module.exports = '@jsonxr/eslint-config/prettier';
+```
 
-## 3. `<project>/.vscode/settings.json`
+# vscode
 
-Configures vscode to use prettier formatter on every save
+1. Install prettier plugin - To install the prettier plugin, in quick open (`cmd+p`), run the following command:
 
-    {
-      "prettier.configPath": ".prettierrc.js",
-      "editor.formatOnSave": true
-    }
+   ```
+   ext install esbenp.prettier-vscode
+   ```
+
+2. Configure project - Add .vscode/settings.json to project to ensure that every cmd+s get's prettiefied. The `npx` command creates this for you so you just need to check it in. If you already have project settings, need to add these.
+
+   `.vscode/settings.json`
+
+   ```javascript
+   {
+     "prettier.configPath": ".prettierrc.js",
+     "editor.formatOnSave": true
+   }
+   ```
