@@ -1,0 +1,67 @@
+#!/bin/sh -e
+
+if [ ! -d node_modules/@jsonxr/eslint-config ]; then
+  echo 'npm i -D @jsonxr/eslint-config'
+  npm i -D @jsonxr/eslint-config
+else
+  echo
+  echo
+  echo 'Warning: @jsonxr/eslint-config already in node_modules'
+  echo
+  echo
+  echo
+fi
+
+if [ ! -f .eslintrc.js ]; then
+  echo 'module.exports = { "extends": "@jsonxr" }' > .eslintrc.js
+  echo '\ncreated .eslintrc.js'
+else
+  echo
+  echo
+  echo 'Warning: .eslintrc.js already exists'
+  echo
+  echo '    Add the following:'
+  echo
+  echo '    { "extends": "@jsonxr" }'
+  echo
+  echo
+  echo
+fi
+
+if [ ! -f .prettierrc.js ]; then
+  echo 'module.exports = "@jsonxr/eslint-config/prettier"' > .prettierrc.js
+  echo '\ncreated .prettierrc.js'
+else
+  echo
+  echo
+  echo 'Warning: .prettierrc.js already exists'
+  echo
+  echo '    Add the following:'
+  echo
+  echo '    module.exports = { ...require("@jsonxr/eslint-config/prettier") }'
+  echo
+  echo
+  echo
+fi
+
+
+settings='{\n  "prettier.configPath": ".prettierrc.js",\n  "editor.formatOnSave": true\n}'
+if [ ! -f .vscode/settings.json ]; then
+  mkdir -p .vscode
+  echo "$settings" > .vscode/settings.json
+  echo '\ncreated .vscode/settings.json'
+else
+  echo
+  echo
+  echo 'Warning: .vscode/settings.json already exists'
+  echo
+  echo '    Add the following:                           '
+  echo
+  echo '    {                                            '
+  echo '       "prettier.configPath": ".prettierrc.js",  '
+  echo '       "editor.formatOnSave": true               '
+  echo '    }                                            '
+  echo
+  echo
+  echo
+fi
